@@ -2,7 +2,7 @@
 //
 
 #include "gtest/gtest.h"
-#include <set.h>
+#include <Set.h>
 
 TEST(SuperSet, InitialSizeIsZero) {
 	Set set;
