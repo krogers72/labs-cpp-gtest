@@ -12,6 +12,4 @@ public:
 
 private:
 	void pauseToEmulateSendReceive(); 
-
-	long truncate(double original); 
 };
