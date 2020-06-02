@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <time.h>
 #ifdef _WIN32
 #  include <Windows.h>
 #else
@@ -10,7 +11,7 @@
 
 
 LunExServices::LunExServices() {
-	// srand(0);
+	srand(time(0));
 }
 
 long LunExServices::currentPrice(const char* symbol) {
