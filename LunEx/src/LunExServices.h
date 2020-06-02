@@ -8,10 +8,10 @@
 class LunExServices : public ITC::SecurityExchangeTransmissionInterface {
 public:
 	LunExServices(); 
-	double currentPrice(const char* symbol); 
+	long currentPrice(const char* symbol); 
 
 private:
 	void pauseToEmulateSendReceive(); 
 
-	double truncate(double original); 
+	long truncate(double original); 
 };
