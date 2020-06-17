@@ -9,7 +9,7 @@ Weapon::Weapon(Galaxy &galaxy) :
     m_enemy((Klingon*)galaxy.variable("target")),
     m_galaxy(&galaxy)
 {
-
+    Weapon::generator = &rand;
 }
 
 Weapon::~Weapon()
