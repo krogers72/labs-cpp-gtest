@@ -1,4 +1,7 @@
-﻿#include <string>
+﻿#ifndef GALAXY_HEADER
+#define GALAXY_HEADER
+
+#include <string>
 
 namespace Untouchables {
     class WebGadget;
@@ -32,3 +35,5 @@ public:
     void writeLine(string message);
 };
 }
+
+#endif
