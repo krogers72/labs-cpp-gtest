@@ -1,7 +1,5 @@
-﻿#include "stdafx.h"
-
-#include <StarTrek/Klingon.h>
-#include <Tests/MockKlingon.h>
+﻿#include "Klingon.h"
+#include "MockKlingon.h"
 
 MockKlingon::MockKlingon(int distance) : deleteCalled_(false) {
     distance_ = distance;

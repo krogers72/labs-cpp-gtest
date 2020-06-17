@@ -1,6 +1,4 @@
-﻿#include "stdafx.h"
-
-#include "Galaxy.h"
+﻿#include "Galaxy.h"
 
 #include <string>
 #include "../Untouchables/WebGadget.h"

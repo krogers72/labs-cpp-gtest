@@ -1,7 +1,7 @@
 ﻿#ifndef MOCK_KLINGON_H
 #define MOCK_KLINGON_H
 
-#include <StarTrek/Klingon.h>
+#include "Klingon.h"
 
 class MockKlingon : public StarTrek::Klingon {
 private:

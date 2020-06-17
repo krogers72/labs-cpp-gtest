@@ -1,12 +1,10 @@
-﻿#include "stdafx.h"
-
-#include <iostream>
+﻿#include <iostream>
 #include <cstdlib>
 #include <string>
-#include <StarTrek/Game.h>
-#include <StarTrek/Galaxy.h>
-#include <Tests/MockGalaxy.h>
-#include <Tests/MockKlingon.h>
+#include "Game.h"
+#include "Galaxy.h"
+#include "MockGalaxy.h"
+#include "MockKlingon.h"
 
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"

@@ -1,10 +1,8 @@
-﻿#include "stdafx.h"
-
-#include <string>
+﻿#include <string>
 #include <map>
 
-#include <StarTrek/Galaxy.h>
-#include <Tests/MockGalaxy.h>
+#include "Galaxy.h"
+#include "MockGalaxy.h"
 
 using namespace std;
 

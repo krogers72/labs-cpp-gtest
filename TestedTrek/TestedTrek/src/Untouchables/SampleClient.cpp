@@ -2,10 +2,10 @@
 
 #include <cstdio>
 #include <memory>
-#include <StarTrek/Game.h>
-#include <StarTrek/Klingon.h>
+#include "Game.h"
+#include "Klingon.h"
 
-using namespace tr1;
+using namespace std;
 using namespace StarTrek;
 
 namespace Untouchables {
