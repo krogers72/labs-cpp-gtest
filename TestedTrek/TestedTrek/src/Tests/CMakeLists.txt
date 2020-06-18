@@ -1,4 +1,9 @@
-set (SOURCES MockGalaxy.cpp MockKlingon.cpp PhaserCharacterizationTests.cpp PhotonCharacterizationTests.cpp)
+set (SOURCES
+    MockGalaxy.cpp
+    MockKlingon.cpp
+    PhaserCharacterizationTests.cpp
+    PhotonCharacterizationTests.cpp
+    GameFixtureShields.cpp)
 
 add_executable(AllTests ${SOURCES})
 
