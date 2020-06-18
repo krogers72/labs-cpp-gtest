@@ -3,6 +3,8 @@
 #include "Game.h"
 #include "Klingon.h"
 #include "Galaxy.h"
+#include "PhotonWeapon.h"
+#include "PhaserWeapon.h"
 
 namespace StarTrek {
 
@@ -12,44 +14,24 @@ Game::Game() : m_energy(10000), m_torpedoes(8) {
     Game::generator = &rand;
 }
 
-void Game::firePhaser(Galaxy& galaxy)
+void Game::firePhaser(Galaxy &galaxy)
 {
+    PhaserWeapon weapon(galaxy);
     int amount = atoi(galaxy.parameter("amount").c_str());
-    Klingon* enemy = (Klingon*)galaxy.variable("target");
     if (m_energy >= amount) {
-        int distance = enemy->distance();
-        if (distance > 4000) {
-            stringstream message;
-            message << "Klingon out of range of phasers at " << distance << " sectors...";
-            galaxy.writeLine(message.str());
-        } else {
-            int damage = amount - (((amount /20)* distance /200) + rnd(200));
-            if (damage < 1)
-                damage = 1;
-            damageEnemy(galaxy, "Phasers", damage, distance, enemy);
-        }
+        weapon.fire();
         m_energy -= amount;
-
     } else {
         galaxy.writeLine("Insufficient energy to fire phasers!");
     }
 }
 
-void Game::firePhotonTorpedo(Galaxy& galaxy)
+void Game::firePhoton(Galaxy& galaxy)
 {
-    Klingon* enemy = (Klingon*)galaxy.variable("target");
+    PhotonWeapon weapon(galaxy);
     if (m_torpedoes > 0) {
-        int distance = enemy->distance();
-        if ((rnd(4) + ((distance / 500) + 1) > 7)) {
-            stringstream message;
-            message << "Torpedo missed Klingon at " << distance << " sectors...";
-            galaxy.writeLine(message.str());
-        } else {
-            int damage = 800 + rnd(50);
-            damageEnemy(galaxy, "Photons", damage, distance, enemy);
-        }
+        weapon.fire();
         m_torpedoes--;
-
     } else {
         galaxy.writeLine("No more photon torpedoes!");
     }
@@ -58,8 +40,9 @@ void Game::firePhotonTorpedo(Galaxy& galaxy)
 void Game::fireWeapon(Galaxy& galaxy) {
 	if (galaxy.parameter("command") == "phaser") {
         firePhaser(galaxy);
+
 	} else if (galaxy.parameter("command") == "photon") {
-        firePhotonTorpedo(galaxy);
+        firePhoton(galaxy);
 	}
 }
 

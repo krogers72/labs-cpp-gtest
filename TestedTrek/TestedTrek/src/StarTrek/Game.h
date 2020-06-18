@@ -7,6 +7,7 @@
 
 namespace StarTrek {
 
+class Klingon;
 class Galaxy;
 class Klingon;
 
@@ -15,12 +16,11 @@ typedef int(*Random)(void);
 
 class Game {
 private:
-    int m_energy;  // Amount of energy
-    int m_torpedoes;  // Number of torpedoes
+    int m_energy;
+    int m_torpedoes;
 
-	static int rnd(int maximum) {
-		return generator() % maximum; 
-	}
+    void firePhaser(Galaxy &galaxy);
+    void firePhoton(Galaxy& galaxy);
 
     void damageEnemy(Galaxy& galaxy,
                      const std::string& weapon_type,
