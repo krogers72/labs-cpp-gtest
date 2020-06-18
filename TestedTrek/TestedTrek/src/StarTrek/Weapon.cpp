@@ -15,10 +15,10 @@ Weapon::Weapon(Galaxy &galaxy) :
 Weapon::~Weapon()
 {
     if(m_enemy)
-        delete m_enemy;
+        m_enemy = nullptr;
 
     if(m_galaxy)
-        delete m_galaxy;
+        m_galaxy = nullptr;
 }
 
 void Weapon::damageEnemy(const int damage, const std::string &weapon_type)
