@@ -1,4 +1,10 @@
-set (SOURCES Galaxy.cpp Game.cpp Klingon.cpp Weapon.cpp PhotonWeapon.cpp PhaserWeapon.cpp)
+set (SOURCES Galaxy.cpp
+    Game.cpp
+    Klingon.cpp
+    Weapon.cpp
+    PhotonWeapon.cpp
+    PhaserWeapon.cpp
+    Shield.cpp)
 
 add_library(StarTrek ${SOURCES})
 
