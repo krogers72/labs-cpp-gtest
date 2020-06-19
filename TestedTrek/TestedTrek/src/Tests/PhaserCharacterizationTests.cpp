@@ -7,7 +7,7 @@
 #include "MockGalaxy.h"
 #include "MockKlingon.h"
 #include "RandomNumberGenerator.h"
-#include "ZeroNumberGenerator.h"
+#include "NotARandomNumberGenerator.h"
 
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
@@ -40,7 +40,7 @@ protected:
 };
 GameFixturePhaser::GameFixturePhaser()
     : context(nullptr),
-      game(std::make_unique<ZeroNumberGenerator>())
+      game(std::make_unique<NotARandomNumberGenerator>(0))
 {}
 
 
@@ -66,16 +66,10 @@ TEST_F(GameFixturePhaser, EnergyExpendedEvenWhenPhasersFiredWhileKlingonOutOfRan
     EXPECT_EQ(EnergyInNewGame - 1000, game.energyRemaining());
 }
 
-static int mockRandom(void) {
-    // it's not random; that's the point!
-    return 0;
-}
-
 TEST_F(GameFixturePhaser, PhasersFiredKlingonDestroyed) {
     MockKlingon* klingon = new MockKlingon(2000, 200);
     galaxyDictionary["amount"] = new string("1000");
     galaxyDictionary["target"] = klingon;
-//    Game::generator = &mockRandom;
     game.fireWeapon(context);
 
     EXPECT_EQ("Phasers hit Klingon at 2000 sectors with 500 units || Klingon destroyed! || ", galaxyOutput);
@@ -88,7 +82,6 @@ TEST_F(GameFixturePhaser, PhasersDamageOfZeroStillHits_AndNondestructivePhaserDa
     string* minimalFired = new string("0");
     galaxyDictionary["amount"] = minimalFired;
     galaxyDictionary["target"] = new MockKlingon(2000, 200);
-//    Game::generator = &mockRandom;
     game.fireWeapon(context);
 
     EXPECT_EQ("Phasers hit Klingon at 2000 sectors with 1 units || Klingon has 199 remaining || ", galaxyOutput);

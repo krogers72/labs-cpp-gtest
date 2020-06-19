@@ -5,7 +5,7 @@
 #include "Galaxy.h"
 #include "MockGalaxy.h"
 #include "MockKlingon.h"
-#include "ZeroNumberGenerator.h"
+#include "NotARandomNumberGenerator.h"
 
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
@@ -17,12 +17,6 @@ using namespace StarTrek;
 
 void insertPhotonCommand(void) {
     galaxyDictionary["command"] = new string("photon");
-}
-
-// This needs to be replaced with a RNG that always returns 1!
-static int mockRandom(void) {
-    // it's not random; that's the point!
-    return 1;
 }
 
 class GameFixturePhoton : public ::testing::Test {
@@ -48,7 +42,7 @@ protected:
 
 GameFixturePhoton::GameFixturePhoton()
     : context(nullptr),
-      game(std::make_unique<ZeroNumberGenerator>())
+      game(std::make_unique<NotARandomNumberGenerator>(1))
 {}
 
 TEST_F(GameFixturePhoton, NotifiedIfNoTorpedoesRemain) {

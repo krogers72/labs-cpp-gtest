@@ -2,6 +2,7 @@ set (SOURCES Galaxy.cpp
     Game.cpp
     Klingon.cpp
     Weapon.cpp
+    NotARandomNumberGenerator.cpp
     PhotonWeapon.cpp
     PhaserWeapon.cpp
     RandomNumberGenerator.cpp
