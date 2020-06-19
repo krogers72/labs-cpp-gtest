@@ -3,6 +3,7 @@
 
 #include <cstdlib>
 #include "WebGadget.h"
+#include "WebGadgetProxy.h"
 
 
 namespace StarTrek {
@@ -19,7 +20,7 @@ private:
 
 public:
 	Game();
-	void fireWeapon(Untouchables::WebGadget& wg);
+    void fireWeapon(WebGadgetProxy& wg);
 };
 
 }

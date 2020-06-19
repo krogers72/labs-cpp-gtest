@@ -1,25 +1,41 @@
 
 
 #include "gtest/gtest.h"
+#include "gmock/gmock.h"
 
 #include "Game.h"
 #include "WebGadgetProxy.h"
+#include "Klingon.h"
 
-TEST(StarTrekCharacterization, SomeAsYetUnknownScenario) {
-	EXPECT_TRUE(false);
-}
+using ::testing::Return;
+using ::testing::Throw;
 
-class MockWebGadgetProxy(WebGadget* gadget) : WebGadgetProxy(gadget)
+using namespace Untouchables;
+using namespace StarTrek;
+
+class MockWebGadgetProxy : public WebGadgetProxy
 {
-    public:
-        MOCK_METHOD(void, writeLine, (string message), (override));
-        MOCK_METHOD(string, parameter, (string parameterName), (override));
-        MOCK_METHOD(void*, variable, (variableName), (override));
-}
+
+public:
+    MockWebGadgetProxy() : WebGadgetProxy(nullptr)
+    {}
+
+    MOCK_METHOD1(writeLine, void(string message));
+    MOCK_METHOD1(parameter, string(string parameterName));
+    MOCK_METHOD1(variable, void*(string variableName));
+};
 
 TEST(StarTrekCharacterization, FirePhaserWeapon)
 {
-
+    Klingon enemy{};
+    int start_energy = enemy.energy();
+    Game game;
+    MockWebGadgetProxy mock_gadget;
+    EXPECT_CALL(mock_gadget, parameter("command")).WillOnce(Return("phaser"));
+    EXPECT_CALL(mock_gadget, parameter("amount")).WillOnce(Return("1000"));
+    EXPECT_CALL(mock_gadget, variable("target")).WillOnce(Return((void*)&enemy));
+    game.fireWeapon(mock_gadget);
+    EXPECT_LT(enemy.energy(), start_energy);
 }
 
 int main(int argc, char** argv)

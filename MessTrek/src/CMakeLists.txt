@@ -1,4 +1,4 @@
-set (SOURCES StarTrek/Game.cpp StarTrek/Klingon.cpp)
+set (SOURCES StarTrek/Game.cpp StarTrek/Klingon.cpp StarTrek/WebGadgetProxy.h)
 
 add_library(StarTrek ${SOURCES})
 
