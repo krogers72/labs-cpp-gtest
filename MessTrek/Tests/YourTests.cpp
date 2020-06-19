@@ -2,7 +2,7 @@
 
 #include "gtest/gtest.h"
 
-#include "StarTrek/Game.h"
+#include "Game.h"
 
 TEST(StarTrekCharacterization, SomeAsYetUnknownScenario) {
 	EXPECT_TRUE(false);
