@@ -3,12 +3,13 @@
 
 #include "Game.h"
 #include "Klingon.h"
+#include "WebGadgetProxy.h"
 
 StarTrek::Game::Game() : e_(10000), t_(8) {
 	srand(time(NULL));
 }
 
-void StarTrek::Game::fireWeapon(Untouchables::WebGadget& wg) {
+void StarTrek::Game::fireWeapon(StarTrek::WebGadgetProxy& wg) {
 	if (wg.parameter("command") == "phaser") {
 		int amount = atoi(wg.parameter("amount").c_str());
 		Klingon* enemy = (Klingon*)wg.variable("target");
@@ -63,7 +64,7 @@ void StarTrek::Game::fireWeapon(Untouchables::WebGadget& wg) {
 				} else {
 					wg.writeLine("Klingon destroyed!");
 					enemy->destroy();
-				}
+                                }
 			}
 			t_--;
 
