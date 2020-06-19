@@ -36,6 +36,9 @@ TEST(StarTrekCharacterization, FirePhaserWeapon)
     EXPECT_CALL(mock_gadget, variable("target")).WillOnce(Return((void*)&enemy));
     game.fireWeapon(mock_gadget);
     EXPECT_LT(enemy.energy(), start_energy);
+
+    EXPECT_EQ(9000, game.getEnergy());
+
 }
 
 int main(int argc, char** argv)

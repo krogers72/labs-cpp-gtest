@@ -32,6 +32,7 @@ public:
 	}
 
 	void destroy() {
+        energy_ = -1;
 	}
 
 };

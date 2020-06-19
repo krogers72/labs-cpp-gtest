@@ -21,6 +21,8 @@ private:
 public:
 	Game();
     void fireWeapon(WebGadgetProxy& wg);
+
+    int getEnergy() { return e_; }
 };
 
 }
