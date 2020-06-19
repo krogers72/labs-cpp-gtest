@@ -2,8 +2,10 @@
 #define WEAPON_H
 
 #include "Klingon.h"
+#include "RandomNumberGenerator.h"
 #include "string"
 #include "sstream"
+#include <memory>
 
 namespace StarTrek {
 
@@ -15,12 +17,14 @@ class Weapon
 {
 
 protected:
-    static int rnd(int maximum) {
-        return generator() % maximum;
+    int rnd(int maximum)
+    {
+        return m_generator.generate(maximum);
     }
 
 public:
-    Weapon(Galaxy &Galaxy);
+    Weapon(Galaxy &Galaxy,
+           RandomNumberGenerator& generator);
     virtual ~Weapon();
 
     virtual void fire() = 0;
@@ -28,9 +32,10 @@ public:
     virtual std::string weaponType() = 0;
     virtual void damageEnemy(const int damage,const std::string &weapon_type);
 
-    static Random generator;
+//    static Random generator;
 
 protected:
+    RandomNumberGenerator& m_generator;
     Klingon* m_enemy;
     Galaxy* m_galaxy;
 };

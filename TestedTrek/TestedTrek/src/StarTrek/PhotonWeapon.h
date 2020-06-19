@@ -9,7 +9,7 @@ namespace StarTrek {
 class PhotonWeapon : public Weapon
 {
 public:
-    PhotonWeapon(Galaxy &galaxy);
+    PhotonWeapon(Galaxy &galaxy, RandomNumberGenerator& generator);
 
     virtual void fire() override;
     virtual int calculateDamage() override;

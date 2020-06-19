@@ -3,7 +3,8 @@ set (SOURCES
     MockKlingon.cpp
     PhaserCharacterizationTests.cpp
     PhotonCharacterizationTests.cpp
-    GameFixtureShields.cpp)
+    GameFixtureShields.cpp
+    ZeroNumberGenerator.cpp)
 
 add_executable(AllTests ${SOURCES})
 

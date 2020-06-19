@@ -5,18 +5,29 @@
 #include "Galaxy.h"
 #include "PhotonWeapon.h"
 #include "PhaserWeapon.h"
+#include "RealRandomNumberGenerator.h"
 
 namespace StarTrek {
 
-Random Game::generator;
+//Random Game::generator;
 
-Game::Game() : m_energy(10000), m_torpedoes(8) {
-    Game::generator = &rand;
+Game::Game()
+    : m_generator(std::make_unique<RealRandomNumberGenerator>()),
+      m_energy(10000),
+      m_torpedoes(8)
+{ }
+
+Game::Game(std::unique_ptr<RandomNumberGenerator> generator)
+    : m_generator(std::move(generator)),
+      m_energy(10000),
+      m_torpedoes(8)
+{
+//    Game::generator = &rand;
 }
 
 void Game::firePhaser(Galaxy &galaxy)
 {
-    PhaserWeapon weapon(galaxy);
+    PhaserWeapon weapon(galaxy, *m_generator);
     int amount = atoi(galaxy.parameter("amount").c_str());
     if (m_energy >= amount) {
         weapon.fire();
@@ -28,7 +39,7 @@ void Game::firePhaser(Galaxy &galaxy)
 
 void Game::firePhoton(Galaxy& galaxy)
 {
-    PhotonWeapon weapon(galaxy);
+    PhotonWeapon weapon(galaxy, *m_generator);
     if (m_torpedoes > 0) {
         weapon.fire();
         m_torpedoes--;

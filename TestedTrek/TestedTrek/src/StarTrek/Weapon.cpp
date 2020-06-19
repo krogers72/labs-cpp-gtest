@@ -3,13 +3,14 @@
 
 namespace StarTrek {
 
-Random Weapon::generator;
+//Random Weapon::generator;
 
-Weapon::Weapon(Galaxy &galaxy) :
+Weapon::Weapon(Galaxy &galaxy, RandomNumberGenerator &generator) :
+    m_generator(generator),
     m_enemy((Klingon*)galaxy.variable("target")),
     m_galaxy(&galaxy)
 {
-    Weapon::generator = &rand;
+//    Weapon::generator = &rand;
 }
 
 Weapon::~Weapon()

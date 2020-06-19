@@ -4,6 +4,8 @@ set (SOURCES Galaxy.cpp
     Weapon.cpp
     PhotonWeapon.cpp
     PhaserWeapon.cpp
+    RandomNumberGenerator.cpp
+    RealRandomNumberGenerator.cpp
     Shield.cpp)
 
 add_library(StarTrek ${SOURCES})

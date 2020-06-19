@@ -4,7 +4,8 @@
 
 namespace StarTrek {
 
-PhotonWeapon::PhotonWeapon(Galaxy &galaxy) : Weapon(galaxy)
+PhotonWeapon::PhotonWeapon(Galaxy &galaxy, RandomNumberGenerator &generator)
+    : Weapon(galaxy, generator)
 {
 
 }

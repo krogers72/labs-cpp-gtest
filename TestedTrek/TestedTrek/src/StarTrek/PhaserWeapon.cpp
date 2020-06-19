@@ -2,7 +2,8 @@
 
 namespace StarTrek {
 
-PhaserWeapon::PhaserWeapon(Galaxy &galaxy) : Weapon(galaxy)
+PhaserWeapon::PhaserWeapon(Galaxy &galaxy, RandomNumberGenerator &generator)
+    : Weapon(galaxy, generator)
 {
 
 }

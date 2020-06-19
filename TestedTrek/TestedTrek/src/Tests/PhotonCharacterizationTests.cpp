@@ -5,6 +5,7 @@
 #include "Galaxy.h"
 #include "MockGalaxy.h"
 #include "MockKlingon.h"
+#include "ZeroNumberGenerator.h"
 
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
@@ -18,6 +19,7 @@ void insertPhotonCommand(void) {
     galaxyDictionary["command"] = new string("photon");
 }
 
+// This needs to be replaced with a RNG that always returns 1!
 static int mockRandom(void) {
     // it's not random; that's the point!
     return 1;
@@ -29,13 +31,13 @@ public:
 
 protected:
 	virtual void SetUp() {
-		Game::generator = &mockRandom; // without this the test would often fail
+//		Game::generator = &mockRandom; // without this the test would often fail
 		galaxyOutput.clear();
 		insertPhotonCommand();
 	}
 	virtual void TearDown() {
 		// typically, we would want to save off the existing value in the setup and then restore it in the teardown
-		Game::generator = &rand;
+//		Game::generator = &rand;
 	}
 
 	// because we are injecting a different Galaxy at link-time,
@@ -43,7 +45,11 @@ protected:
 	Galaxy context;
 	Game game;
 };
-GameFixturePhoton::GameFixturePhoton() :context(nullptr){}
+
+GameFixturePhoton::GameFixturePhoton()
+    : context(nullptr),
+      game(std::make_unique<ZeroNumberGenerator>())
+{}
 
 TEST_F(GameFixturePhoton, NotifiedIfNoTorpedoesRemain) {
     game.torpedoes(0);

@@ -6,6 +6,8 @@
 #include "Galaxy.h"
 #include "MockGalaxy.h"
 #include "MockKlingon.h"
+#include "RandomNumberGenerator.h"
+#include "ZeroNumberGenerator.h"
 
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
@@ -21,7 +23,7 @@ void insertPhaserCommand() {
 
 class GameFixturePhaser : public ::testing::Test {
 public:
-	GameFixturePhaser();
+    GameFixturePhaser();
 
 protected:
 	virtual void SetUp() {
@@ -34,9 +36,12 @@ protected:
 	// because we are injecting a different Galaxy at link-time,
 	// there is no differentiation here as far as type, namespace, etc
 	Galaxy context;
-	Game game;
+    Game game;
 };
-GameFixturePhaser::GameFixturePhaser() :context(nullptr){}
+GameFixturePhaser::GameFixturePhaser()
+    : context(nullptr),
+      game(std::make_unique<ZeroNumberGenerator>())
+{}
 
 
 static const int EnergyInNewGame = 10000;
@@ -70,7 +75,7 @@ TEST_F(GameFixturePhaser, PhasersFiredKlingonDestroyed) {
     MockKlingon* klingon = new MockKlingon(2000, 200);
     galaxyDictionary["amount"] = new string("1000");
     galaxyDictionary["target"] = klingon;
-    Game::generator = &mockRandom;
+//    Game::generator = &mockRandom;
     game.fireWeapon(context);
 
     EXPECT_EQ("Phasers hit Klingon at 2000 sectors with 500 units || Klingon destroyed! || ", galaxyOutput);
@@ -83,7 +88,7 @@ TEST_F(GameFixturePhaser, PhasersDamageOfZeroStillHits_AndNondestructivePhaserDa
     string* minimalFired = new string("0");
     galaxyDictionary["amount"] = minimalFired;
     galaxyDictionary["target"] = new MockKlingon(2000, 200);
-    Game::generator = &mockRandom;
+//    Game::generator = &mockRandom;
     game.fireWeapon(context);
 
     EXPECT_EQ("Phasers hit Klingon at 2000 sectors with 1 units || Klingon has 199 remaining || ", galaxyOutput);
