@@ -29,4 +29,5 @@ ipch
 *.user
 *.sdf
 
-TestedTrek/TestedTrek/build-src-Desktop-Debug/
+debug/
+release/

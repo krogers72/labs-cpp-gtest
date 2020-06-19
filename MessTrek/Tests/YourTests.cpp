@@ -2,8 +2,8 @@
 
 #include "gtest/gtest.h"
 
-#include "StarTrek/Game.h"
-#include "StarTrek/WebGadgetProxy.h"
+#include "Game.h"
+#include "WebGadgetProxy.h"
 
 TEST(StarTrekCharacterization, SomeAsYetUnknownScenario) {
 	EXPECT_TRUE(false);
